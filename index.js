@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 
 
 const MongoClient = require('mongodb').MongoClient;
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.shlex.mongodb.net/volunteer-network?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.shlex.mongodb.net/${process.env.DB_Name}?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true  });
 client.connect(err => {
   const collection = client.db("volunteer-network").collection("volunteer");
@@ -52,4 +52,4 @@ app.get('/', (req, res) => {
   res.send('Hello Developer World!')
 })
 
-app.listen(port);
+app.listen(process.env.PORT || port);
